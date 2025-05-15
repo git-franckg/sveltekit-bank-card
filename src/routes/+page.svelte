@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { number, cardImages } from '$lib/index.js';
+  import { number, cardImages, imgGenericCard } from '$lib/index.js';
 
   let pan = $state('');
 
@@ -11,9 +11,7 @@
   <input type="tel" bind:value={pan} />
 </label>
 
-{#if card && card.card}
-  <img src={cardImages[card.card.networkType]} height="40" alt={card.card.networkName} />
-{/if}
+<img src={card.card ? cardImages[card.card.networkType] : imgGenericCard} height="40" alt={card.card?.networkName ?? 'Carte bancaire'} />
 
 <p>
   {JSON.stringify(card, null, 2)}

@@ -12,6 +12,8 @@ import imgMir from './mir.svg';
 import imgUnionpay from './unionpay.svg';
 import imgVisa from './visa.svg';
 
+export { default as imgGenericCard } from './generic.svg';
+
 // [url, weight]
 export const cardImages: Record<CardType, string> = {
   'american-express': imgAmex,
