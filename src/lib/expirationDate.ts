@@ -1,12 +1,12 @@
 export interface ExpirationDates {
   values: string[];
   example: string;
-  mask: "00/00";
+  mask: '00/00';
 }
 
 export function getExpirationDates({
   maxYears = 10,
-  date = new Date(),
+  date = new Date()
 }: {
   maxYears?: number;
   date?: Date;
@@ -17,7 +17,7 @@ export function getExpirationDates({
   const values: string[] = [];
 
   function add(month: number, year: number) {
-    const mm = month.toString().padStart(2, "0");
+    const mm = month.toString().padStart(2, '0');
     const yy = year.toString().substring(2);
     values.push(`${mm}/${yy}`);
   }
@@ -42,7 +42,7 @@ export function getExpirationDates({
 
   return {
     values,
-    example: values[0] ?? "MM/YY",
-    mask: "00/00",
+    example: values[0] ?? 'MM/YY',
+    mask: '00/00'
   };
 }

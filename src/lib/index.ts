@@ -1,34 +1,36 @@
-import cardValidator from "card-validator";
-import { createPanMask } from "./string.js";
-import { getExpirationDates } from "./expirationDate.js";
+import { getExpirationDates } from './expirationDate.js';
+import { createPanMask } from './string.js';
+import cardValidator from 'card-validator';
+
+export * as images from './images/index.js';
 
 export type CardName =
-  | "Visa"
-  | "Mastercard"
-  | "American Express"
-  | "Diners Club"
-  | "Discover"
-  | "JCB"
-  | "UnionPay"
-  | "Maestro"
-  | "Elo"
-  | "Mir"
-  | "Hiper"
-  | "Hipercard";
+  | 'Visa'
+  | 'Mastercard'
+  | 'American Express'
+  | 'Diners Club'
+  | 'Discover'
+  | 'JCB'
+  | 'UnionPay'
+  | 'Maestro'
+  | 'Elo'
+  | 'Mir'
+  | 'Hiper'
+  | 'Hipercard';
 
 export type CardType =
-  | "visa"
-  | "mastercard"
-  | "american-express"
-  | "diners-club"
-  | "discover"
-  | "jcb"
-  | "unionpay"
-  | "maestro"
-  | "elo"
-  | "mir"
-  | "hiper"
-  | "hipercard";
+  | 'visa'
+  | 'mastercard'
+  | 'american-express'
+  | 'diners-club'
+  | 'discover'
+  | 'jcb'
+  | 'unionpay'
+  | 'maestro'
+  | 'elo'
+  | 'mir'
+  | 'hiper'
+  | 'hipercard';
 
 export interface BankCard {
   isValid: boolean;
@@ -55,11 +57,7 @@ export interface BankCard {
 }
 
 export function number(num: string): BankCard {
-  const {
-    isValid,
-    isPotentiallyValid: isMaybeValid,
-    card,
-  } = cardValidator.number(num);
+  const { isValid, isPotentiallyValid: isMaybeValid, card } = cardValidator.number(num);
 
   if (!card) return { isValid, isMaybeValid };
 
@@ -71,15 +69,15 @@ export function number(num: string): BankCard {
       networkType: card.type as CardType,
       pan: {
         mask: createPanMask(card.lengths, card.gaps),
-        lengths: card.lengths,
+        lengths: card.lengths
       },
       code: {
         name: card.code.name,
-        mask: "0".repeat(card.code.size),
-        example: [...Array(card.code.size).keys()].map((n) => n + 1).join(""),
-        length: card.code.size,
+        mask: '0'.repeat(card.code.size),
+        example: [...Array(card.code.size).keys()].map((n) => n + 1).join(''),
+        length: card.code.size
       },
-      exp: getExpirationDates(),
-    },
+      exp: getExpirationDates()
+    }
   };
 }
