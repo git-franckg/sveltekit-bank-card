@@ -2,7 +2,7 @@ import { getExpirationDates } from './expirationDate.js';
 import { createPanMask } from './string.js';
 import cardValidator from 'card-validator';
 
-export * as images from './images/index.js';
+export * from './images/index.js';
 
 export type CardName =
   | 'Visa'
